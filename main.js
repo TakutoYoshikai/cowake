@@ -25,10 +25,10 @@ class Group {
     for (let i = 0; i < this.numTotalRooms; i++) {
       rooms.push([]);
     }
-    for (let i = 1; i < this.members.length + 1; i++) {
+    for (let i = 0; i < this.members.length; i++) {
       let member = this.members[i];
-      let firstSession = i % this.numSessions;
-      let nSession = (firstSession * n) % this.numSessions;
+      let firstSession = (i + 1) % this.numSessions;
+      let nSession = (firstSession * (n + 1)) % this.numSessions;
       rooms[nSession].push(member);
     }
     return rooms;
