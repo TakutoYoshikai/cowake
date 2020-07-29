@@ -75,6 +75,7 @@ function makePrimeNumbers() {
 }
 
 let primeNumbers = makePrimeNumbers();
+console.log(primeNumbers);
 let NUM_MAX_ROOMS = 16;
 
 function makeGroups(members, sessionTime, talkTime, minIntroTime, minMembers) {
@@ -89,7 +90,7 @@ function makeGroups(members, sessionTime, talkTime, minIntroTime, minMembers) {
       let numMaxRooms = members.length % n;
       let numMinRooms = n - numMaxRooms;
       let numSessions = n;
-      if (introTime < minIntroTime * 60) {
+      if (introTime >= minIntroTime * 60) {
         let group = new Group(members, n, numMaxMembers, numMaxRooms, numMinMembers, numMinRooms, numSessions, introTime);
         groups.push(group);
       }
@@ -102,5 +103,5 @@ let members = [];
 for (let i = 1; i <= 50; i++) {
   members.push(new Member(i, "member" + i));
 }
-let group = makeGroups(members, 10, 5, 1, 3)[4];
-console.log(group.session(2));
+let group = makeGroups(members, 10, 5, 1, 3)[0];
+console.log(group.session(3));
