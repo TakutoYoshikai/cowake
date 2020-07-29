@@ -25,11 +25,18 @@ class Group {
     for (let i = 0; i < this.numTotalRooms; i++) {
       rooms.push([]);
     }
-    for (let i = 0; i < this.members.length; i++) {
+    for (let i = 1; i < this.members.length + 1; i++) {
       let member = this.members[i];
       let firstSession = i % this.numSessions;
       let nSession = (firstSession * n) % this.numSessions;
       rooms[nSession].push(member);
+    }
+    return rooms;
+  }
+  allSessions() {
+    let rooms = [];
+    for (let i = 0; i < this.numSessions; i++) {
+      rooms.push(this.session(i));
     }
     return rooms;
   }
@@ -104,4 +111,25 @@ for (let i = 1; i <= 50; i++) {
   members.push(new Member(i, "member" + i));
 }
 let group = makeGroups(members, 10, 5, 1, 3)[0];
-console.log(group.session(3));
+console.log(group.allSessions());
+
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+app.post("/", function(req, res) {
+  let tsv = req.body.tsv;
+  let members = parseTsv(tsv);
+  let groups = makeGroups(members, 10, 5, 1, 3);
+  console.log(groups[0].allSessions());
+  res.json({sessions: groups[0].allSessions()});
+});
+
+app.listen(3000);
