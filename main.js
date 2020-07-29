@@ -8,7 +8,10 @@ class Member {
 }
 
 class Group {
-  constructor(numTotalRooms, numMaxMembers, numMaxRooms, numMinMembers, numMinRooms, numSessions, introTime) {
+  constructor(members, numTotalRooms, numMaxMembers, numMaxRooms, numMinMembers, numMinRooms, numSessions, introTime) {
+    this.members = members.sort(function(a, b) {
+      return a.id - b.id;
+    });
     this.numTotalRooms = numTotalRooms;
     this.numMaxMembers = numMaxMembers;
     this.numMaxRooms = numMaxRooms;
@@ -16,6 +19,19 @@ class Group {
     this.numMinRooms = numMinRooms;
     this.numSessions = numSessions;
     this.introTime = introTime;
+  }
+  session(n) {
+    let rooms = [];
+    for (let i = 0; i < this.numTotalRooms; i++) {
+      rooms.push([]);
+    }
+    for (let i = 0; i < this.members.length; i++) {
+      let member = this.members[i];
+      let firstSession = i % this.numSessions;
+      let nSession = (firstSession * n) % this.numSessions;
+      rooms[nSession].push(member);
+    }
+    return rooms;
   }
 }
 
@@ -67,14 +83,14 @@ function makeGroups(members, sessionTime, talkTime, minIntroTime, minMembers) {
 
   for (let n of primeNumbers) {
     if (n <= NUM_MAX_ROOMS) {
-      let introTime = (sessionTime - talkTime) / (Math.floor(members.length / n) + 1) * 60;
+      let introTime = Math.floor((sessionTime - talkTime) / (Math.floor(members.length / n) + 1) * 60);
       let numMinMembers = Math.floor(members.length / n);
       let numMaxMembers = numMinMembers + 1;
       let numMaxRooms = members.length % n;
       let numMinRooms = n - numMaxRooms;
       let numSessions = n;
       if (introTime < minIntroTime * 60) {
-        let group = new Group(n, numMaxMembers, numMaxRooms, numMinMembers, numMinRooms, numSessions, introTime);
+        let group = new Group(members, n, numMaxMembers, numMaxRooms, numMinMembers, numMinRooms, numSessions, introTime);
         groups.push(group);
       }
     }
@@ -86,4 +102,5 @@ let members = [];
 for (let i = 1; i <= 50; i++) {
   members.push(new Member(i, "member" + i));
 }
-console.log(makeGroups(members, 10, 5, 1, 3));
+let group = makeGroups(members, 10, 5, 1, 3)[4];
+console.log(group.session(2));
