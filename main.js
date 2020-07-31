@@ -27,8 +27,16 @@ class Group {
     }
     for (let i = 0; i < this.members.length; i++) {
       let member = this.members[i];
-      let firstSession = (i + 1) % this.numSessions;
-      let nSession = (firstSession * (n + 1)) % this.numSessions;
+      let memberId = i + 1;
+      let firstSession = memberId % this.numTotalRooms;
+      let t;
+      if (memberId <= this.numMaxMembers * this.numMaxRooms) {
+        t = i % this.numMaxMembers;
+      } else {
+        t = (i - this.numMaxMembers * this.numMaxRooms) % this.numMinMembers;
+      }
+      let diff = t + 1;
+      let nSession = (firstSession + diff * n) % this.numTotalRooms;
       rooms[nSession].push(member);
     }
     return rooms;
