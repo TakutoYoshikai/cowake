@@ -132,12 +132,18 @@ function test() {
     members.push(new Member(i, "member" + i));
   }
   let group = makeGroups(members, 10, 5, 1, 3)[1];
+  let max = group.numMaxMembers;
+  let min = group.numMinMembers;
   let dic = {};
   for (let i = 1; i <= 50; i++) {
     dic[i.toString()] = [];
   }
   for (let session of group.allSessions()) {
     for (let group of session) {
+      if (group.length !== max && group.length !== min) {
+        console.log("failed test");
+        return;
+      }
       for (let memberA of group) {
         for (let memberB of group) {
           if (memberA.id != memberB.id) {
