@@ -27,9 +27,17 @@ document.getElementById("submit").onclick = function() {
   xhr.open("POST", "http://localhost:3000/", true);
   xhr.setRequestHeader("Content-Type", 'application/json;charset=UTF-8');
   let tsv = document.getElementById("tsv").value;
-  tsv = {
-    tsv: tsv
+  let sessionTime = parseInt(document.getElementById("sessionTime").value);
+  let talkTime = parseInt(document.getElementById("talkTime").value);
+  let minIntroTime = parseInt(document.getElementById("minIntroTime").value);
+  let minMembers = parseInt(document.getElementById("minMembers").value);
+  json = {
+    tsv: tsv,
+    sessionTime: sessionTime,
+    talkTime: talkTime,
+    minIntroTime: minIntroTime,
+    minMembers: minMembers,
   }
   xhr.send(
-    JSON.stringify(tsv));
+    JSON.stringify(json));
 }
