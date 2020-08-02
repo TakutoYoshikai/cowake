@@ -86,6 +86,16 @@ function makePrimeNumbers() {
   return result;
 }
 
+function showSession(session) {
+  for (let group of session) {
+    let s = "";
+    for (let member of group) {
+      s += member.id + ",";
+    }
+    console.log(s);
+  }
+}
+
 let primeNumbers = makePrimeNumbers();
 console.log(primeNumbers);
 let NUM_MAX_ROOMS = 16;
@@ -116,7 +126,10 @@ for (let i = 1; i <= 50; i++) {
   members.push(new Member(i, "member" + i));
 }
 let group = makeGroups(members, 10, 5, 1, 3)[1];
-console.log(group.allSessions());
+for (let session of group.allSessions()) {
+  showSession(session);
+  console.log("=========");
+}
 
 const express = require("express");
 const app = express();
