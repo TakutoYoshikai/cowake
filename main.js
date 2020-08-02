@@ -18,12 +18,22 @@ app.post("/", function(req, res) {
   let talkTime = req.body.talkTime;
   let minIntroTime = req.body.minIntroTime;
   let minMembers = req.body.minMembers;
-
-  let members = cowake.parseTsv(tsv);
-  console.log(req.body);
+  let members;
+  try {
+    members = cowake.parseTsv(tsv);
+  } catch (err) {
+    res.json({
+      success: false,
+      message: err.message,
+    });
+    return;
+  }
   let groups = cowake.makeGroups(members, sessionTime, talkTime, minIntroTime, minMembers);
   console.log(groups[0].allSessions());
-  res.json({sessions: groups[0].allSessions()});
+  res.json({
+    success: true,
+    sessions: groups[0].allSessions()
+  });
 });
 
 app.listen(3000);
