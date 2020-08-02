@@ -35,11 +35,29 @@ class Group {
     return rooms;
   }
   allSessions() {
-    let rooms = [];
+    let sessions = [];
     for (let i = 0; i < this.numTotalRooms; i++) {
-      rooms.push(this.session(i));
+      sessions.push(this.session(i));
     }
-    return rooms;
+    return sessions;
+  }
+  show() {
+    let sessions = this.allSessions();
+    let session_i = 0;
+    for (let session of sessions) {
+      console.log("session " + session_i);
+      let group_i = 0;
+      for (let group of session) {
+        console.log("group " + group_i);
+        let s = "";
+        for (let member of group) {
+          s += member.id + ",";
+        }
+        console.log(s);
+        group_i++;
+      }
+      session_i++;
+    }
   }
 }
 
@@ -160,7 +178,6 @@ function test() {
         return;
       }
     }
-    console.log(dic);
   }
   console.log("success");
 }
