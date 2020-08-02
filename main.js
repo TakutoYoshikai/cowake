@@ -27,9 +27,7 @@ class Group {
     }
     for (let i = 0; i < this.members.length; i++) {
       let member = this.members[i];
-      let memberId = i + 1;
       let firstSession = i % this.numTotalRooms;
-      let t;
       let diff = (Math.floor(i / this.numTotalRooms) * n);
       let nSession = (firstSession + diff) % this.numTotalRooms;
       rooms[nSession].push(member);
