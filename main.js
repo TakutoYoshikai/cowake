@@ -25,25 +25,22 @@ class Group {
     for (let i = 0; i < this.numTotalRooms; i++) {
       rooms.push([]);
     }
+      console.log(this);
     for (let i = 0; i < this.members.length; i++) {
       let member = this.members[i];
       let memberId = i + 1;
-      let firstSession = memberId % this.numTotalRooms;
+      let firstSession = i % this.numTotalRooms;
+      console.log(firstSession);
       let t;
-      if (memberId <= this.numMaxMembers * this.numMaxRooms) {
-        t = i % this.numMaxMembers;
-      } else {
-        t = (i - this.numMaxMembers * this.numMaxRooms) % this.numMinMembers;
-      }
-      let diff = t + 1;
-      let nSession = (firstSession + diff * n) % this.numTotalRooms;
+      let diff = Math.floor(memberId / this.numTotalRooms) * n;
+      let nSession = (firstSession + diff) % this.numTotalRooms;
       rooms[nSession].push(member);
     }
     return rooms;
   }
   allSessions() {
     let rooms = [];
-    for (let i = 0; i < this.numSessions; i++) {
+    for (let i = 0; i < this.numTotalRooms; i++) {
       rooms.push(this.session(i));
     }
     return rooms;
@@ -118,7 +115,7 @@ let members = [];
 for (let i = 1; i <= 50; i++) {
   members.push(new Member(i, "member" + i));
 }
-let group = makeGroups(members, 10, 5, 1, 3)[0];
+let group = makeGroups(members, 10, 5, 1, 3)[1];
 console.log(group.allSessions());
 
 const express = require("express");
