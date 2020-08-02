@@ -25,14 +25,12 @@ class Group {
     for (let i = 0; i < this.numTotalRooms; i++) {
       rooms.push([]);
     }
-      console.log(this);
     for (let i = 0; i < this.members.length; i++) {
       let member = this.members[i];
       let memberId = i + 1;
       let firstSession = i % this.numTotalRooms;
-      console.log(firstSession);
       let t;
-      let diff = Math.floor(memberId / this.numTotalRooms) * n;
+      let diff = (Math.floor(i / this.numTotalRooms) * n);
       let nSession = (firstSession + diff) % this.numTotalRooms;
       rooms[nSession].push(member);
     }
@@ -97,7 +95,6 @@ function showSession(session) {
 }
 
 let primeNumbers = makePrimeNumbers();
-console.log(primeNumbers);
 let NUM_MAX_ROOMS = 16;
 
 function makeGroups(members, sessionTime, talkTime, minIntroTime, minMembers) {
@@ -121,15 +118,50 @@ function makeGroups(members, sessionTime, talkTime, minIntroTime, minMembers) {
   return groups;
 }
 
-let members = [];
-for (let i = 1; i <= 50; i++) {
-  members.push(new Member(i, "member" + i));
+function uniq(array) {
+  const uniquedArray = [];
+  for (const elem of array) {
+    if (uniquedArray.indexOf(elem) < 0)
+      uniquedArray.push(elem);
+  }
+  return uniquedArray;
 }
-let group = makeGroups(members, 10, 5, 1, 3)[1];
-for (let session of group.allSessions()) {
-  showSession(session);
-  console.log("=========");
+function test() {
+  let members = [];
+  for (let i = 1; i <= 50; i++) {
+    members.push(new Member(i, "member" + i));
+  }
+  let group = makeGroups(members, 10, 5, 1, 3)[1];
+  let dic = {};
+  for (let i = 1; i <= 50; i++) {
+    dic[i.toString()] = [];
+  }
+  for (let session of group.allSessions()) {
+    for (let group of session) {
+      for (let memberA of group) {
+        for (let memberB of group) {
+          if (memberA.id != memberB.id) {
+            dic[memberA.id.toString()].push(memberB.id);
+          }
+        }
+      }
+    }
+
+    for (let i = 1; i <= 50; i++) {
+      dic[i.toString()].sort(function(a, b) {
+        return a - b;
+      });
+      if (dic[i.toString()].length != uniq(dic[i.toString()]).length) {
+        console.log("failed test");
+        return;
+      }
+    }
+    console.log(dic);
+  }
+  console.log("success");
 }
+test();
+
 
 const express = require("express");
 const app = express();
