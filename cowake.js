@@ -113,7 +113,6 @@ let primeNumbers = makePrimeNumbers();
 let NUM_MAX_ROOMS = 16;
 
 function makeGroups(members, sessionTime, talkTime, minIntroTime, minMembers) {
-  let allRooms = 0;
   let groups = [];
 
   for (let n of primeNumbers) {

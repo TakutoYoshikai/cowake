@@ -30,10 +30,9 @@ app.post("/", function(req, res) {
   }
   let groups = cowake.makeGroups(members, sessionTime, talkTime, minIntroTime, minMembers);
   console.log(groups[0].allSessions());
-  res.json({
-    success: true,
-    sessions: groups[0].allSessions()
-  });
+  res.json(
+    groups[0].allSessions()
+  );
 });
 
 app.listen(3000);

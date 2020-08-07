@@ -1,7 +1,7 @@
 
 function showTables(json) {
   console.log(json);
-  let sessions = json.sessions;
+  let sessions = json;
   for (let j = 0; j < sessions.length; j++) {
     let session = sessions[j];
     let sessionTag = "<p>セッション" + j + "</p><div class='session'>";
@@ -24,7 +24,7 @@ document.getElementById("submit").onclick = function() {
   xhr.onload = function() {
     showTables(JSON.parse(xhr.responseText));
   }
-  xhr.open("POST", "http://localhost:3000/", true);
+  xhr.open("POST", "http://localhost:3000", true);
   xhr.setRequestHeader("Content-Type", 'application/json;charset=UTF-8');
   let tsv = document.getElementById("tsv").value;
   let sessionTime = parseInt(document.getElementById("sessionTime").value);
@@ -33,10 +33,10 @@ document.getElementById("submit").onclick = function() {
   let minMembers = parseInt(document.getElementById("minMembers").value);
   json = {
     tsv: tsv,
-    sessionTime: sessionTime,
-    talkTime: talkTime,
-    minIntroTime: minIntroTime,
-    minMembers: minMembers,
+    session_time: sessionTime,
+    talk_time: talkTime,
+    min_intro_time: minIntroTime,
+    min_members: minMembers,
   }
   xhr.send(
     JSON.stringify(json));
