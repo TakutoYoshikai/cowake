@@ -40,6 +40,20 @@ class Group {
     }
     return sessions;
   }
+  memberRooms() {
+    let result = [];
+    for (let i = 0; i < this.members.length; i++) {
+      let memberRoom = [];
+      for (let n = 0; n < this.numSessions; n++) {
+        let firstSession = i % this.numTotalRooms;
+        let diff = (Math.floor(i / this.numTotalRooms) * n);
+        let nSession = (firstSession + diff) % this.numTotalRooms;
+        memberRoom.push(nSession + 1);
+      }
+      result.push(memberRoom);
+    }
+    return result;
+  }
   show() {
     let sessions = this.allSessions();
     let session_i = 0;
