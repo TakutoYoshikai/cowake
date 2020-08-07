@@ -39,7 +39,7 @@ document.getElementById("submit").onclick = function() {
   xhr.onload = function() {
     showRooms(JSON.parse(xhr.responseText));
   }
-  xhr.open("POST", "http://localhost:3000", true);
+  xhr.open("POST", "http://localhost:8081", true);
   xhr.setRequestHeader("Content-Type", 'application/json;charset=UTF-8');
   let tsv = document.getElementById("tsv").value;
   let sessionTime = parseInt(document.getElementById("sessionTime").value);
