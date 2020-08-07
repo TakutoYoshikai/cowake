@@ -1,4 +1,4 @@
-const parse = require("csv-parse/lib/sync");
+//const parse = require("csv-parse/lib/sync");
 class Member {
   constructor(id, name) {
     this.id = id;
@@ -79,6 +79,27 @@ function parseTsv(text) {
   let records = parse(text, {
     delimiter: "\t"
   });
+  
+  for (let record of records) {
+    if (record.length !== 2) {
+      throw new Error("csv parse error");
+    }
+    let id = parseInt(record[0]);
+    if (isNaN(id)) {
+      throw new Error("csv parse error");
+    }
+    let name = record[1];
+    members.push(new Member(id, name));
+  }
+  return members;
+}
+
+function parseTsvFront(text) {
+  let members = [];
+  let records = Papa.parse(text, {
+    delimiter: "\t",
+    header: false,
+  }).data;
   
   for (let record of records) {
     if (record.length !== 2) {
