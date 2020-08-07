@@ -3,18 +3,20 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="index.css">   
+    <script src="bower_components/papaparse/papaparse.min.js"></script>
+    <script src="cowake-front.js"></script>
   </head>
   <body>
     参加者
     <textarea id="tsv"></textarea>
     <br>
-    セッション時間
+    セッション時間(分)
     <input type="number" id="sessionTime">
     <br>
-    自由討論時間
+    自由討論時間(分)
     <input type="number" id="talkTime">
     <br>
-    自己紹介最小時間
+    自己紹介最小時間(分)
     <input type="number" id="minIntroTime">
     <br>
     グループ最小人数
@@ -22,7 +24,7 @@
     <br>
     <input type="button" id="submit" value="表示">
 
-    <script src="index.js"></script>
     <div id="result"></div>
+    <script src="cowake-index.js"></script>
   </body>
 </html>
