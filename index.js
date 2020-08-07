@@ -1,7 +1,22 @@
-
+function showRooms(json) {
+  let rooms = json.rooms;
+  let members = json.members;
+  let tableTag = "<table>";
+  for (let i = 0; i < rooms.length; i++) {
+    tableTag += "<tr>";
+    tableTag += "<td>" + members[i].name + "</td>";
+    let member = rooms[i];
+    for (let roomId of member) {
+      tableTag += "<td>" + roomId + "</td>";
+    }
+    tableTag += "</tr>";
+  }
+  tableTag += "</table>";
+  document.getElementById("result").insertAdjacentHTML("beforeend", tableTag);
+}
 function showTables(json) {
   console.log(json);
-  let sessions = json;
+  let sessions = json.sessions;
   for (let j = 0; j < sessions.length; j++) {
     let session = sessions[j];
     let tableTag = "セッション" + (j + 1);
@@ -22,7 +37,7 @@ function showTables(json) {
 document.getElementById("submit").onclick = function() {
   let xhr = new XMLHttpRequest();
   xhr.onload = function() {
-    showTables(JSON.parse(xhr.responseText));
+    showRooms(JSON.parse(xhr.responseText));
   }
   xhr.open("POST", "http://localhost:3000", true);
   xhr.setRequestHeader("Content-Type", 'application/json;charset=UTF-8');
