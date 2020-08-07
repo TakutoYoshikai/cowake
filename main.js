@@ -14,10 +14,10 @@ app.use(function(req, res, next) {
 
 app.post("/", function(req, res) {
   let tsv = req.body.tsv;
-  let sessionTime = req.body.sessionTime;
-  let talkTime = req.body.talkTime;
-  let minIntroTime = req.body.minIntroTime;
-  let minMembers = req.body.minMembers;
+  let sessionTime = req.body.session_time;
+  let talkTime = req.body.talk_time;
+  let minIntroTime = req.body.min_intro_time;
+  let minMembers = req.body.min_members;
   let members;
   try {
     members = cowake.parseTsv(tsv);
@@ -29,7 +29,6 @@ app.post("/", function(req, res) {
     return;
   }
   let groups = cowake.makeGroups(members, sessionTime, talkTime, minIntroTime, minMembers);
-  console.log(groups[0].allSessions());
   res.json(
     groups[0].allSessions()
   );

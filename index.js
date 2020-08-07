@@ -4,19 +4,19 @@ function showTables(json) {
   let sessions = json;
   for (let j = 0; j < sessions.length; j++) {
     let session = sessions[j];
-    let sessionTag = "<p>セッション" + j + "</p><div class='session'>";
+    let tableTag = "セッション" + (j + 1);
+    tableTag += "<table>";
     for (let i = 0; i < session.length; i++) {
       let room = session[i];
-      let roomTag = "<p>チーム" + i + "</p><div class='room'>";
-       
+      tableTag += "<tr>";
+      tableTag += "<td>ルーム" + (i + 1) + "</td>";
       for (let member of room) {
-        roomTag += "<p>" + member.id + ": " + member.name + "</p>";
+        tableTag += "<td>" + member.name + "</td>";
       }
-      roomTag += "</div>";
-      sessionTag += roomTag;
+      tableTag += "</tr>";
     }
-    sessionTag += "</div>";
-    document.getElementById("result").insertAdjacentHTML("beforeend", sessionTag);
+    tableTag += "</table><br><br>";
+    document.getElementById("result").insertAdjacentHTML("beforeend", tableTag);
   }
 }
 document.getElementById("submit").onclick = function() {
