@@ -3,12 +3,17 @@ function showRooms(json) {
   let rooms = json.rooms;
   let members = json.members;
   let tableTag = "<table>";
+  tableTag += "<tr>";
+  tableTag += "<th>名前</th>";
+  for (let i = 0; i < rooms[0].length; i++) {
+    tableTag += "<th>" + (i + 1) + "回目</th>";
+  }
   for (let i = 0; i < rooms.length; i++) {
     tableTag += "<tr>";
     tableTag += "<td>" + members[i].name + "</td>";
     let member = rooms[i];
     for (let roomId of member) {
-      tableTag += "<td>" + roomId + "</td>";
+      tableTag += "<td class='center'>" + roomId + "</td>";
     }
     tableTag += "</tr>";
   }
