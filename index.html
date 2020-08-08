@@ -7,22 +7,26 @@
     <script src="cowake.js"></script>
   </head>
   <body>
-    参加者
-    <textarea id="tsv"></textarea>
-    <br>
-    セッション時間(分)　
-    <span class="pm-button" id="m-session-time">-</span><input type="number" id="sessionTime" value="10"><span class="pm-button" id="p-session-time">+</span>
-    <br>
-    自由討論時間(分)　　
-    <span class="pm-button" id="m-talk-time">-</span><input type="number" id="talkTime" value="5"><span class="pm-button" id="p-talk-time">+</span>
-    <br>
-    自己紹介最小時間(分)
-    <span class="pm-button" id="m-min-intro-time">-</span><input type="number" id="minIntroTime" value="1"><span class="pm-button" id="p-min-intro-time">+</span>
-    <br>
-    グループ最小人数&nbsp;&nbsp;&nbsp;　
-    <span class="pm-button" id="m-min-members">-</span><input type="number" id="minMembers" value="3"><span class="pm-button" id="p-min-members">+</span>
-    <br>
-    <input type="button" id="submit" value="表示">
+    <div class="main">
+      セッション時間(分)　
+      <span class="pm-button" id="m-session-time">-</span><input type="number" id="sessionTime" value="10"><span class="pm-button" id="p-session-time">+</span>
+      <br>
+      自由討論時間(分)　　
+      <span class="pm-button" id="m-talk-time">-</span><input type="number" id="talkTime" value="5"><span class="pm-button" id="p-talk-time">+</span>
+      <br>
+      自己紹介最小時間(分)
+      <span class="pm-button" id="m-min-intro-time">-</span><input type="number" id="minIntroTime" value="1"><span class="pm-button" id="p-min-intro-time">+</span>
+      <br>
+      グループ最小人数&nbsp;&nbsp;&nbsp;　
+      <span class="pm-button" id="m-min-members">-</span><input type="number" id="minMembers" value="3"><span class="pm-button" id="p-min-members">+</span>
+      <br>
+      参加者<br>
+      <textarea id="tsv"></textarea>
+      <br>
+      <div class="center">
+        <input type="button" id="submit" value="表示">
+      </div>
+    </div>
 
     <div id="result"></div>
     <script src="cowake-offline.js"></script>

@@ -2,6 +2,13 @@
   border: solid 2px #000;
 }
 
+textarea {
+  width: 300px;
+  height: 200px;
+  border: 2px solid #AAA;
+  border-radius: 10px;
+  resize: none;
+}
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -26,9 +33,27 @@ input[type="number"] {
   line-height: 30px;
   margin-right: 3px;
   user-select: none;
+  margin-bottom: 10px;
 }
 
 .pm-button:hover {
   background: #CCC;
   color: white;
+}
+
+#submit {
+  margin-top: 20px;
+  border: 2px solid #AAA;
+  border-radius: 5px;
+  width: 70px;
+  height: 40px;
+}
+
+.center {
+  text-align: center;
+}
+.main {
+  width: 310px;
+  margin-left: auto;
+  margin-right: auto;
 }
