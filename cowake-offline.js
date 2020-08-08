@@ -41,13 +41,27 @@ function showRooms(groups, groupIndex) {
   document.getElementById("result").innerHTML = radioTableTag;
   let tableTag = "<table>";
   tableTag += "<tr>";
-  tableTag += "<th>名前</th>";
+  tableTag += "<th>Room No.</th>";
+  tableTag += "<th>ID1</th>";
+  tableTag += "<th>ID2</th>";
   for (let i = 0; i < rooms[0].length; i++) {
     tableTag += "<th>" + (i + 1) + "回目</th>";
   }
+  let roomN = 0;
   for (let i = 0; i < rooms.length; i++) {
+    let roomNo = "";
+    if (roomN < rooms[i][0]) {
+      roomN++;
+      roomNo = roomN.toString();
+    }
     tableTag += "<tr>";
-    tableTag += "<td>" + members[i].data[1] + "</td>";
+    tableTag += "<td>" + roomNo + "</td>";
+    tableTag += "<td>" + members[i].data[0] + "</td>";
+    let id2 = "";
+    if (members[i].data.length >= 2) {
+      id2 = members[i].data[1];
+    }
+    tableTag += "<td>" + id2 + "</td>";
     let member = rooms[i];
     for (let roomId of member) {
       tableTag += "<td class='center'>" + roomId + "</td>";
