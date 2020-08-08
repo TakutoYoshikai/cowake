@@ -1,4 +1,3 @@
-//const parse = require("csv-parse/lib/sync");
 class Member {
   constructor(id, name) {
     this.id = id;
@@ -75,6 +74,7 @@ class Group {
 }
 
 function parseTsv(text) {
+  const parse = require("csv-parse/lib/sync");
   let members = [];
   let records = parse(text, {
     delimiter: "\t"
