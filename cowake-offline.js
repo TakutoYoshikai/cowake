@@ -1,8 +1,21 @@
 
-function showRooms(json) {
-  let rooms = json.rooms;
-  let members = json.members;
-  document.getElementById("result").innerHTML = "";
+let currentGroups = null;
+function changeSession(event) {
+  let index = parseInt(document.getElementById("select-session").value);
+  showRooms(currentGroups, index);
+}
+function showRooms(groups, groupIndex) {
+  let rooms = groups[groupIndex].memberRooms();
+  let members = groups[groupIndex].members;
+  let selectTag = "<div class='center'><select id='select-session' onchange='changeSession();'>";
+  for (let i = 0; i < groups.length; i++) {
+    if (i == groupIndex) {
+      selectTag += "<option value = '" + i + "' selected>" + groups[i].numTotalRooms + "セッション</option></div>";
+    } else {
+      selectTag += "<option value = '" + i + "'>" + groups[i].numTotalRooms + "セッション</option></div>";
+    }
+  }
+  document.getElementById("result").innerHTML = selectTag;
   let tableTag = "<table>";
   tableTag += "<tr>";
   tableTag += "<th>名前</th>";
@@ -51,12 +64,11 @@ document.getElementById("submit").onclick = function() {
   let minMembers = parseInt(document.getElementById("minMembers").value);
   let members = parseTsvFront(tsv);
   let groups = makeGroups(members, sessionTime, talkTime, minIntroTime, minMembers);
-  let group = groups[0];
   let json = {
-    members: members,
-    rooms: group.memberRooms(),
+    groups: groups
   }
-  showRooms(json);
+  currentGroups = groups;
+  showRooms(groups, 0);
 
 }
 
