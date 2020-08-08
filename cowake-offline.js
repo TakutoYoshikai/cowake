@@ -11,7 +11,7 @@ function showRooms(json) {
   }
   for (let i = 0; i < rooms.length; i++) {
     tableTag += "<tr>";
-    tableTag += "<td>" + members[i].name + "</td>";
+    tableTag += "<td>" + members[i].data[1] + "</td>";
     let member = rooms[i];
     for (let roomId of member) {
       tableTag += "<td class='center'>" + roomId + "</td>";
@@ -34,7 +34,7 @@ function showTables(json) {
       tableTag += "<tr>";
       tableTag += "<td>ルーム" + (i + 1) + "</td>";
       for (let member of room) {
-        tableTag += "<td>" + member.name + "</td>";
+        tableTag += "<td>" + member.data[1] + "</td>";
       }
       tableTag += "</tr>";
     }

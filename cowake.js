@@ -1,15 +1,12 @@
 class Member {
-  constructor(id, name) {
-    this.id = id;
-    this.name = name;
+  constructor(data) {
+    this.data = data;
   }
 }
 
 class Group {
   constructor(members, numTotalRooms, numMaxMembers, numMaxRooms, numMinMembers, numMinRooms, numSessions, introTime) {
-    this.members = members.sort(function(a, b) {
-      return a.id - b.id;
-    });
+    this.members = members;
     this.numTotalRooms = numTotalRooms;
     this.numMaxMembers = numMaxMembers;
     this.numMaxRooms = numMaxRooms;
@@ -53,24 +50,6 @@ class Group {
     }
     return result;
   }
-  show() {
-    let sessions = this.allSessions();
-    let session_i = 0;
-    for (let session of sessions) {
-      console.log("session " + session_i);
-      let group_i = 0;
-      for (let group of session) {
-        console.log("group " + group_i);
-        let s = "";
-        for (let member of group) {
-          s += member.id + ",";
-        }
-        console.log(s);
-        group_i++;
-      }
-      session_i++;
-    }
-  }
 }
 
 function parseTsv(text) {
@@ -81,15 +60,10 @@ function parseTsv(text) {
   });
   
   for (let record of records) {
-    if (record.length !== 2) {
+    if (record.length > 3) {
       throw new Error("csv parse error");
     }
-    let id = parseInt(record[0]);
-    if (isNaN(id)) {
-      throw new Error("csv parse error");
-    }
-    let name = record[1];
-    members.push(new Member(id, name));
+    members.push(new Member(record));
   }
   return members;
 }
@@ -102,15 +76,10 @@ function parseTsvFront(text) {
   }).data;
   
   for (let record of records) {
-    if (record.length !== 2) {
+    if (record.length > 3) {
       throw new Error("csv parse error");
     }
-    let id = parseInt(record[0]);
-    if (isNaN(id)) {
-      throw new Error("csv parse error");
-    }
-    let name = record[1];
-    members.push(new Member(id, name));
+    members.push(new Member(record));
   }
   return members;
 }
@@ -134,15 +103,6 @@ function makePrimeNumbers() {
   return result;
 }
 
-function showSession(session) {
-  for (let group of session) {
-    let s = "";
-    for (let member of group) {
-      s += member.id + ",";
-    }
-    console.log(s);
-  }
-}
 
 let primeNumbers = makePrimeNumbers();
 let NUM_MAX_ROOMS = 16;
@@ -178,7 +138,7 @@ function uniq(array) {
 function test() {
   let members = [];
   for (let i = 1; i <= 50; i++) {
-    members.push(new Member(i, "member" + i));
+    members.push(new Member([i.toString(), "member" + i]));
   }
   let group = makeGroups(members, 10, 5, 1, 3)[1];
   let max = group.numMaxMembers;
@@ -195,8 +155,8 @@ function test() {
       }
       for (let memberA of group) {
         for (let memberB of group) {
-          if (memberA.id != memberB.id) {
-            dic[memberA.id.toString()].push(memberB.id);
+          if (memberA.data[0] != memberB.data[0]) {
+            dic[memberA.data[0]].push(memberB.data[0]);
           }
         }
       }
