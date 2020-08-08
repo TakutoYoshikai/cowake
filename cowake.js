@@ -6,7 +6,7 @@ class Member {
 
 class Group {
   constructor(members, numTotalRooms, numMaxMembers, numMaxRooms, numMinMembers, numMinRooms, numSessions, introTime) {
-    this.members = members;
+    this.members = members.sort();
     this.numTotalRooms = numTotalRooms;
     this.numMaxMembers = numMaxMembers;
     this.numMaxRooms = numMaxRooms;
@@ -48,6 +48,9 @@ class Group {
       }
       result.push(memberRoom);
     }
+    result = result.sort(function(a, b) {
+      return a[0] - b[0];
+    });
     return result;
   }
 }
