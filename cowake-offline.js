@@ -2,6 +2,7 @@
 function showRooms(json) {
   let rooms = json.rooms;
   let members = json.members;
+  document.getElementById("result").innerHTML = "";
   let tableTag = "<table>";
   tableTag += "<tr>";
   tableTag += "<th>名前</th>";

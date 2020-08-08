@@ -1,3 +1,11 @@
+body {
+  background-color: #fef6e4;
+}
+* {
+  border-color: #001858 !important;
+  color: #001858;
+  font-weight: bold;
+}
 .room {
   border: solid 2px #000;
 }
@@ -17,18 +25,22 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance:textfield;
   width: 30px;
-  height: 30px;
+  position: relative;
+  top: 1px;
+  height: 29px;
   text-align: center;
   margin-right: 3px;
+  border-width: 2px;
+  border-radius: 5px;
 }
 
 
 .pm-button {
   width: 30px;
-  border: #BBB solid 1px;
+  border: #BBB solid 2px;
   border-radius: 5px;
   display: inline-block;
-  height: 30px;
+  height: 31px;
   text-align: center;
   line-height: 30px;
   margin-right: 3px;
@@ -62,10 +74,33 @@ input[type="number"] {
 table {
   margin-left: auto;
   margin-right: auto;
-  border-collapse: collapse;
-  border: 1px solid #AAA;
+  border: 2px solid #aaa;
+  border-left: 1px solid #aaa;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+table th,
+table th,
+table td {
+  padding: 20px 10px;
+  border-bottom: 1px solid #aaa;
+  background-color: white;
+}
+table th {
+  background-color: #DDD;
+}
+table th + th,
+table td {
+  border-left: 1px solid #aaa;
+}
+table tr:last-child th,
+table tr:last-child td {
+  border-bottom: none;
 }
 
-th, td {
-  border: 1px solid #AAA;
+th:first-child {
+  border-left: 1px solid #aaa;
+  
 }
