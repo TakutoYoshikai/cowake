@@ -4,9 +4,20 @@ function changeSession(event) {
   let index = parseInt(document.getElementById("select-session").value);
   showRooms(currentGroups, index);
 }
+
+function changeRadio() {
+  var radio = document.getElementsByName("radio-session");
+  for(let i = 0; i < radio.length; i++){
+    if (radio[i].checked) {
+      showRooms(currentGroups, i); 
+      return;
+    }
+  }
+}
 function showRooms(groups, groupIndex) {
   let rooms = groups[groupIndex].memberRooms();
   let members = groups[groupIndex].members;
+  /*
   let selectTag = "<div class='center'><select id='select-session' onchange='changeSession();'>";
   for (let i = 0; i < groups.length; i++) {
     if (i == groupIndex) {
@@ -16,6 +27,18 @@ function showRooms(groups, groupIndex) {
     }
   }
   document.getElementById("result").innerHTML = selectTag;
+  */
+  let radioTableTag = "<table><tr><th>選択</th><th>総部屋数</th><th>部屋Aの人数</th><th>部屋Aの部屋数</th><th>部屋Bの人数</th><th>部屋Bの部屋数</th><th>最大可能セッション数</th><th>自己紹介時間</th></tr>";
+  for (let i = 0; i < groups.length; i++) {
+    let group = groups[i];
+    let checked = "";
+    if (groupIndex == i) {
+      checked = "checked";
+    }
+    radioTableTag += `<tr><td><input type="radio" name="radio-session" value="${i}" onchange="changeRadio();" ${checked}></td><td>${group.numTotalRooms}</td><td>${group.numMaxMembers}</td><td>${group.numMaxRooms}</td><td>${group.numMinMembers}</td><td>${group.numMinRooms}</td><td></td><td>${group.introTime}分</td></tr>`
+  }
+  radioTableTag += "</table>";
+  document.getElementById("result").innerHTML = radioTableTag;
   let tableTag = "<table>";
   tableTag += "<tr>";
   tableTag += "<th>名前</th>";
