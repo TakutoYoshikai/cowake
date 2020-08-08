@@ -13,7 +13,6 @@ body {
 textarea {
   width: 300px;
   height: 200px;
-  border: 2px solid #AAA;
   border-radius: 10px;
   resize: none;
 }
@@ -56,7 +55,7 @@ input[type="number"] {
 #submit {
   margin-top: 20px;
   margin-bottom: 40px;
-  border: 2px solid #AAA;
+  border: 2px solid;
   border-radius: 5px;
   width: 70px;
   height: 40px;
@@ -74,8 +73,8 @@ input[type="number"] {
 table {
   margin-left: auto;
   margin-right: auto;
-  border: 2px solid #aaa;
-  border-left: 1px solid #aaa;
+  border: 2px solid;
+  border-left: 1px solid;
   border-collapse: separate;
   border-spacing: 0;
   border-radius: 10px;
@@ -85,7 +84,7 @@ table th,
 table th,
 table td {
   padding: 20px 10px;
-  border-bottom: 1px solid #aaa;
+  border-bottom: 1px solid;
   background-color: white;
 }
 table th {
@@ -93,7 +92,7 @@ table th {
 }
 table th + th,
 table td {
-  border-left: 1px solid #aaa;
+  border-left: 1px solid;
 }
 table tr:last-child th,
 table tr:last-child td {
@@ -101,6 +100,6 @@ table tr:last-child td {
 }
 
 th:first-child {
-  border-left: 1px solid #aaa;
+  border-left: 1px solid;
   
 }
