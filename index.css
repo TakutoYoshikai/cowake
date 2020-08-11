@@ -1,10 +1,18 @@
+@font-face {
+  font-family: "Corp";
+  src: url("corp.ttf");
+}
+
+h1 {
+  font-family: none;
+}
 body {
   background-color: #fef6e4;
 }
 * {
   border-color: #001858 !important;
   color: #001858;
-  font-weight: bold;
+  font-family: Corp;
 }
 .room {
   border: solid 2px #000;
@@ -15,6 +23,7 @@ textarea {
   height: 200px;
   border-radius: 10px;
   resize: none;
+  margin-top: 5px;
 }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -24,8 +33,6 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance:textfield;
   width: 30px;
-  position: relative;
-  top: 1px;
   height: 29px;
   text-align: center;
   margin-right: 3px;
@@ -111,3 +118,14 @@ select {
   height: 40px;
   margin-bottom: 20px;
 }
+
+#params-table {
+  border: none;
+}
+#params-table td {
+  border: none;
+  background: none;
+  width: 160px;
+  padding: 5px;
+}
+
