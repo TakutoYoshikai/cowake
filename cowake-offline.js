@@ -1,4 +1,33 @@
 
+class MemberTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.group = props.group;
+    this.state = {
+      memberRooms: this.group.memberRooms(),
+    }
+  }
+  render() {
+    const sessionHeaders = [];
+    for (let i = 0; i < this.state.memberRooms[0].length; i++) {
+      sessionHeaders.push(
+        <th>{(i + 1) + "回目"}</th>
+      )
+    }
+    for (
+    return (
+      <table>
+        <tr>
+          <th>Room No.</th>
+          <th>ID1</th>
+          <th>ID2</th>
+          { sessionHeaders }
+        </tr>
+      </table>
+    );
+  }
+}
+
 let currentGroups = null;
 function changeSession(event) {
   let index = parseInt(document.getElementById("select-session").value);
@@ -15,61 +44,8 @@ function changeRadio() {
   }
 }
 function showRooms(groups, groupIndex) {
-  let rooms = groups[groupIndex].memberRooms();
-  let members = groups[groupIndex].members;
-  /*
-  let selectTag = "<div class='center'><select id='select-session' onchange='changeSession();'>";
-  for (let i = 0; i < groups.length; i++) {
-    if (i == groupIndex) {
-      selectTag += "<option value = '" + i + "' selected>" + groups[i].numTotalRooms + "セッション</option></div>";
-    } else {
-      selectTag += "<option value = '" + i + "'>" + groups[i].numTotalRooms + "セッション</option></div>";
-    }
-  }
-  document.getElementById("result").innerHTML = selectTag;
-  */
-  let radioTableTag = "<table><tr><th>選択</th><th>総部屋数</th><th>部屋Aの人数</th><th>部屋Aの部屋数</th><th>部屋Bの人数</th><th>部屋Bの部屋数</th><th>最大可能セッション数</th><th>自己紹介時間</th></tr>";
-  for (let i = 0; i < groups.length; i++) {
-    let group = groups[i];
-    let checked = "";
-    if (groupIndex == i) {
-      checked = "checked";
-    }
-    radioTableTag += `<tr><td><input type="radio" name="radio-session" value="${i}" onchange="changeRadio();" ${checked}></td><td>${group.numTotalRooms}</td><td>${group.numMaxMembers}</td><td>${group.numMaxRooms}</td><td>${group.numMinMembers}</td><td>${group.numMinRooms}</td><td></td><td>${group.introTime}分</td></tr>`
-  }
-  radioTableTag += "</table>";
-  document.getElementById("result").innerHTML = radioTableTag;
-  let tableTag = "<table>";
-  tableTag += "<tr>";
-  tableTag += "<th>Room No.</th>";
-  tableTag += "<th>ID1</th>";
-  tableTag += "<th>ID2</th>";
-  for (let i = 0; i < rooms[0].length; i++) {
-    tableTag += "<th>" + (i + 1) + "回目</th>";
-  }
-  let roomN = 0;
-  for (let i = 0; i < rooms.length; i++) {
-    let roomNo = "";
-    if (roomN < rooms[i][0]) {
-      roomN++;
-      roomNo = roomN.toString();
-    }
-    tableTag += "<tr>";
-    tableTag += "<td>" + roomNo + "</td>";
-    tableTag += "<td>" + members[i].data[0] + "</td>";
-    let id2 = "";
-    if (members[i].data.length >= 2) {
-      id2 = members[i].data[1];
-    }
-    tableTag += "<td>" + id2 + "</td>";
-    let member = rooms[i];
-    for (let roomId of member) {
-      tableTag += "<td class='center'>" + roomId + "</td>";
-    }
-    tableTag += "</tr>";
-  }
-  tableTag += "</table>";
-  document.getElementById("result").insertAdjacentHTML("beforeend", tableTag);
+  alert("AAA");
+  ReactDOM.render(<MemberTable group={groups[0]} />, document.getElementById("result"));
 }
 
 function showTables(json) {
