@@ -14,7 +14,7 @@ class MemberTable extends React.Component {
         <th>{(i + 1) + "回目"}</th>
       )
     }
-    for (
+    let roomNo = 0;
     return (
       <table>
         <tr>
@@ -23,6 +23,13 @@ class MemberTable extends React.Component {
           <th>ID2</th>
           { sessionHeaders }
         </tr>
+        { this.state.memberRooms.map((member) => {
+          return (
+            <tr>
+              <td>{ member[0] > roomNo ? ++roomNo : "" }</td>
+            </tr>
+          );
+        }) }
       </table>
     );
   }
@@ -43,9 +50,8 @@ function changeRadio() {
     }
   }
 }
-function showRooms(groups, groupIndex) {
-  alert("AAA");
-  ReactDOM.render(<MemberTable group={groups[0]} />, document.getElementById("result"));
+function showRooms(group, groupIndex) {
+  ReactDOM.render(<MemberTable group={group} />, document.getElementById("result"));
 }
 
 function showTables(json) {
@@ -81,7 +87,7 @@ document.getElementById("submit").onclick = function() {
     groups: groups
   }
   currentGroups = groups;
-  showRooms(groups, 0);
+  showRooms(groups[0], 0);
 
 }
 
