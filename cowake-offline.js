@@ -33,9 +33,9 @@ class GroupInfoTable extends React.Component {
 class MemberTable extends React.Component {
   constructor(props) {
     super(props);
-    this.group = props.group;
     this.state = {
-      memberRooms: this.group.memberRooms(),
+      group: props.group,
+      memberRooms: props.group.memberRooms(),
     }
   }
   render() {
@@ -58,8 +58,8 @@ class MemberTable extends React.Component {
           return (
             <tr>
               <td>{ member[0] > roomNo ? ++roomNo : "" }</td>
-              <td>{ this.group.members[index].data[0] }</td>
-              <td>{ this.group.members[index].data.length >= 2 ? this.group.members[index].data[1] : "" }</td>
+              <td>{ this.state.group.members[index].data[0] }</td>
+              <td>{ this.state.group.members[index].data.length >= 2 ? this.state.group.members[index].data[1] : "" }</td>
               {
                 member.map((room) => {
                   return <td>{room}</td>
@@ -74,6 +74,7 @@ class MemberTable extends React.Component {
 }
 
 let currentGroups = null;
+let memberTable = null;
 
 function changeRadio() {
   var radio = document.getElementsByName("radio-session");
@@ -88,7 +89,14 @@ function changeRadio() {
 function showRooms(groups, groupIndex) {
 
   ReactDOM.render(<GroupInfoTable groups={groups} />, document.getElementById("group-info"));
-  ReactDOM.render(<MemberTable group={groups[groupIndex]} />, document.getElementById("result"));
+  if (memberTable === null) {
+    ReactDOM.render(<MemberTable ref={(c) => memberTable = c} group={groups[groupIndex]} />, document.getElementById("result"));
+  } else {
+    memberTable.setState({
+      group: groups[groupIndex],
+      memberRooms: groups[groupIndex].memberRooms(),
+    });
+  }
 }
 
 
