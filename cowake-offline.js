@@ -1,4 +1,5 @@
 
+
 class MemberTable extends React.Component {
   constructor(props) {
     super(props);
@@ -23,10 +24,17 @@ class MemberTable extends React.Component {
           <th>ID2</th>
           { sessionHeaders }
         </tr>
-        { this.state.memberRooms.map((member) => {
+        { this.state.memberRooms.map((member, index) => {
           return (
             <tr>
               <td>{ member[0] > roomNo ? ++roomNo : "" }</td>
+              <td>{ this.group.members[index].data[0] }</td>
+              <td>{ this.group.members[index].data.length >= 2 ? this.group.members[index].data[1] : "" }</td>
+              {
+                member.map((room) => {
+                  return <td>{room}</td>
+                })
+              }
             </tr>
           );
         }) }
