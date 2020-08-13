@@ -1,4 +1,34 @@
 
+class GroupInfoTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.groups = props.groups;
+  }
+  render() {
+    return (
+      <table>
+        <tr>
+          <th>選択</th>
+          <th>総部屋数</th>
+          <th>部屋Aの人数</th>
+          <th>部屋Aの部屋数</th>
+          <th>部屋Bの人数</th>
+          <th>部屋Bの部屋数</th>
+        </tr>
+        { this.groups.map((group, index) => {
+          return (<tr>
+            <td><input type="radio" name="radio-session" value={ index.toString() } onChange={ changeRadio } /></td>
+            <td>{ group.numTotalRooms }</td>
+            <td>{ group.numMaxMembers }</td>
+            <td>{ group.numMaxRooms }</td>
+            <td>{ group.numMinMembers }</td>
+            <td>{ group.numMinRooms }</td>
+          </tr>);
+        })}
+      </table>
+    );
+  }
+}
 
 class MemberTable extends React.Component {
   constructor(props) {
@@ -58,30 +88,11 @@ function changeRadio() {
     }
   }
 }
-function showRooms(group, groupIndex) {
-  ReactDOM.render(<MemberTable group={group} />, document.getElementById("result"));
+function showRooms(groups, groupIndex) {
+  ReactDOM.render(<GroupInfoTable groups={groups} />, document.getElementById("group-info"));
+  ReactDOM.render(<MemberTable group={groups[0]} />, document.getElementById("result"));
 }
 
-function showTables(json) {
-  console.log(json);
-  let sessions = json.sessions;
-  for (let j = 0; j < sessions.length; j++) {
-    let session = sessions[j];
-    let tableTag = "セッション" + (j + 1);
-    tableTag += "<table>";
-    for (let i = 0; i < session.length; i++) {
-      let room = session[i];
-      tableTag += "<tr>";
-      tableTag += "<td>ルーム" + (i + 1) + "</td>";
-      for (let member of room) {
-        tableTag += "<td>" + member.data[1] + "</td>";
-      }
-      tableTag += "</tr>";
-    }
-    tableTag += "</table><br><br>";
-    document.getElementById("result").insertAdjacentHTML("beforeend", tableTag);
-  }
-}
 
 document.getElementById("submit").onclick = function() {
   let tsv = document.getElementById("tsv").value;
@@ -95,7 +106,7 @@ document.getElementById("submit").onclick = function() {
     groups: groups
   }
   currentGroups = groups;
-  showRooms(groups[0], 0);
+  showRooms(groups, 0);
 
 }
 
