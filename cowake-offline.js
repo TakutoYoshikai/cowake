@@ -74,10 +74,6 @@ class MemberTable extends React.Component {
 }
 
 let currentGroups = null;
-function changeSession(event) {
-  let index = parseInt(document.getElementById("select-session").value);
-  showRooms(currentGroups, index);
-}
 
 function changeRadio() {
   var radio = document.getElementsByName("radio-session");
@@ -88,9 +84,11 @@ function changeRadio() {
     }
   }
 }
+
 function showRooms(groups, groupIndex) {
+
   ReactDOM.render(<GroupInfoTable groups={groups} />, document.getElementById("group-info"));
-  ReactDOM.render(<MemberTable group={groups[0]} />, document.getElementById("result"));
+  ReactDOM.render(<MemberTable group={groups[groupIndex]} />, document.getElementById("result"));
 }
 
 
@@ -102,9 +100,6 @@ document.getElementById("submit").onclick = function() {
   let minMembers = parseInt(document.getElementById("minMembers").value);
   let members = parseTsvFront(tsv);
   let groups = makeGroups(members, sessionTime, talkTime, minIntroTime, minMembers);
-  let json = {
-    groups: groups
-  }
   currentGroups = groups;
   showRooms(groups, 0);
 
@@ -132,6 +127,7 @@ mSessionTime.onclick = function() {
   }
   sessionTime.value = (value - 1).toString();
 }
+
 pSessionTime.onclick = function() {
   let value = parseInt(sessionTime.value);
   if (value >= 240) {
