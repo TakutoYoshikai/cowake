@@ -6,7 +6,7 @@ class Member {
 
 class Group {
   constructor(members, numTotalRooms, numMaxMembers, numMaxRooms, numMinMembers, numMinRooms, numSessions, introTime) {
-    this.members = members.sort();
+    this.members = members;
     this.numTotalRooms = numTotalRooms;
     this.numMaxMembers = numMaxMembers;
     this.numMaxRooms = numMaxRooms;
@@ -18,9 +18,9 @@ class Group {
   session(n) {
     let rooms = [];
     for (let i = 0; i < this.numTotalRooms; i++) {
-      rooms.push([]);
+      rooms.push([this.members[i]]);
     }
-    for (let i = 0; i < this.members.length; i++) {
+    for (let i = this.numTotalRooms; i < this.members.length; i++) {
       let member = this.members[i];
       let firstSession = i % this.numTotalRooms;
       let diff = (Math.floor(i / this.numTotalRooms) * n);
@@ -38,7 +38,18 @@ class Group {
   }
   memberRooms() {
     let result = [];
-    for (let i = 0; i < this.members.length; i++) {
+    for (let i = 0; i < this.numTotalRooms; i++) {
+      let session = i + 1;
+      let memberRoom = [];
+      for (let n = 0; n < this.numSessions; n++) {
+        memberRoom.push(session);
+      }
+      result.push({
+        member: this.members[i],
+        rooms: memberRoom,
+      });
+    }
+    for (let i = this.numTotalRooms; i < this.members.length; i++) {
       let memberRoom = [];
       for (let n = 0; n < this.numSessions; n++) {
         let firstSession = i % this.numTotalRooms;
@@ -46,10 +57,13 @@ class Group {
         let nSession = (firstSession + diff) % this.numTotalRooms;
         memberRoom.push(nSession + 1);
       }
-      result.push(memberRoom);
+      result.push({
+        member: this.members[i],
+        rooms: memberRoom,
+      });
     }
     result = result.sort(function(a, b) {
-      return a[0] - b[0];
+      return a.rooms[0] - b.rooms[0];
     });
     return result;
   }

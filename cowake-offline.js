@@ -40,7 +40,7 @@ class MemberTable extends React.Component {
   }
   render() {
     const sessionHeaders = [];
-    for (let i = 0; i < this.state.memberRooms[0].length; i++) {
+    for (let i = 0; i < this.state.memberRooms[0].rooms.length; i++) {
       sessionHeaders.push(
         <th>{(i + 1) + "回目"}</th>
       )
@@ -54,14 +54,16 @@ class MemberTable extends React.Component {
           <th>ID2</th>
           { sessionHeaders }
         </tr>
-        { this.state.memberRooms.map((member, index) => {
+        { this.state.memberRooms.map((memberRoom, index) => {
+          let member = memberRoom.member;
+          let rooms = memberRoom.rooms;
           return (
             <tr>
-              <td>{ member[0] > roomNo ? ++roomNo : "" }</td>
-              <td>{ this.state.group.members[index].data[0] }</td>
-              <td>{ this.state.group.members[index].data.length >= 2 ? this.state.group.members[index].data[1] : "" }</td>
+              <td>{ rooms[0] > roomNo ? ++roomNo : "" }</td>
+              <td>{ member.data[0] }</td>
+              <td>{ member.data.length >= 2 ? member.data[1] : "" }</td>
               {
-                member.map((room) => {
+                rooms.map((room) => {
                   return <td>{room}</td>
                 })
               }
