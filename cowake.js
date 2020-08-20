@@ -128,14 +128,16 @@ function makeGroups(members, minMembers) {
   let groups = [];
 
   for (let n of primeNumbers) {
-    if (n <= NUM_MAX_ROOMS && n >= 3) {
+    if (n <= NUM_MAX_ROOMS) {
       let numMinMembers = Math.floor(members.length / n);
       let numMaxMembers = numMinMembers + 1;
       let numMaxRooms = members.length % n;
       let numMinRooms = n - numMaxRooms;
       let numSessions = n;
-      let group = new Group(members, n, numMaxMembers, numMaxRooms, numMinMembers, numMinRooms, numSessions, null);
-      groups.push(group);
+      if (n >= numMaxMembers && n >= minMembers) {
+        let group = new Group(members, n, numMaxMembers, numMaxRooms, numMinMembers, numMinRooms, numSessions, null);
+        groups.push(group);
+      }
     }
   }
   return groups;
