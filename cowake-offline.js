@@ -110,80 +110,19 @@ function showRooms(groups, groupIndex) {
 
 document.getElementById("submit").onclick = function() {
   let tsv = document.getElementById("tsv").value;
-  let sessionTime = parseInt(document.getElementById("sessionTime").value);
-  let talkTime = parseInt(document.getElementById("talkTime").value);
-  let minIntroTime = parseInt(document.getElementById("minIntroTime").value);
   let minMembers = parseInt(document.getElementById("minMembers").value);
   let members = parseTsvFront(tsv);
-  let groups = makeGroups(members, sessionTime, talkTime, minIntroTime, minMembers);
+  let groups = makeGroups(members, minMembers);
   currentGroups = groups;
   showRooms(groups, 0);
 
 }
 
-let sessionTime = document.getElementById("sessionTime");
-let talkTime = document.getElementById("talkTime");
-let minIntroTime = document.getElementById("minIntroTime");
 let minMembers = document.getElementById("minMembers");
 
-let mSessionTime = document.getElementById("m-session-time");
-let pSessionTime = document.getElementById("p-session-time");
-let mTalkTime = document.getElementById("m-talk-time");
-let pTalkTime = document.getElementById("p-talk-time");
-let mMinIntroTime = document.getElementById("m-min-intro-time");
-let pMinIntroTime = document.getElementById("p-min-intro-time");
 let mMinMembers = document.getElementById("m-min-members");
 let pMinMembers = document.getElementById("p-min-members");
 
-mSessionTime.onclick = function() {
-  let value = parseInt(sessionTime.value);
-  if (value <= 1) {
-    sessionTime.value = 1;
-    return;
-  }
-  sessionTime.value = (value - 1).toString();
-}
-
-pSessionTime.onclick = function() {
-  let value = parseInt(sessionTime.value);
-  if (value >= 240) {
-    sessionTime.value = 240;
-    return;
-  }
-  sessionTime.value = (value + 1).toString();
-}
-mTalkTime.onclick = function() {
-  let value = parseInt(talkTime.value);
-  if (value <= 1) {
-    talkTime.value = 1;
-    return;
-  }
-  talkTime.value = (value - 1).toString();
-}
-pTalkTime.onclick = function() {
-  let value = parseInt(talkTime.value);
-  if (value >= 240) {
-    talkTime.value = 240;
-    return;
-  }
-  talkTime.value = (value + 1).toString();
-}
-mMinIntroTime.onclick = function() {
-  let value = parseInt(minIntroTime.value);
-  if (value <= 1) {
-    minIntroTime.value = 1;
-    return;
-  }
-  minIntroTime.value = (value - 1).toString();
-}
-pMinIntroTime.onclick = function() {
-  let value = parseInt(minIntroTime.value);
-  if (value >= 240) {
-    minIntroTime.value = 240;
-    return;
-  }
-  minIntroTime.value = (value + 1).toString();
-}
 mMinMembers.onclick = function() {
   let value = parseInt(minMembers.value);
   if (value <= 1) {
