@@ -2,7 +2,9 @@
 class GroupInfoTable extends React.Component {
   constructor(props) {
     super(props);
-    this.groups = props.groups;
+    this.state = {
+      groups: props.groups,
+    }
   }
   render() {
     return (
@@ -15,7 +17,7 @@ class GroupInfoTable extends React.Component {
           <th>部屋Bの人数</th>
           <th>部屋Bの部屋数</th>
         </tr>
-        { this.groups.map((group, index) => {
+        { this.state.groups.map((group, index) => {
           return (<tr>
             <td><input type="radio" name="radio-session" value={ index.toString() } onChange={ changeRadio } /></td>
             <td>{ group.numTotalRooms }</td>
@@ -77,6 +79,7 @@ class MemberTable extends React.Component {
 
 let currentGroups = null;
 let memberTable = null;
+let groupInfo = null;
 
 function changeRadio() {
   var radio = document.getElementsByName("radio-session");
@@ -90,10 +93,13 @@ function changeRadio() {
 
 function showRooms(groups, groupIndex) {
 
-  ReactDOM.render(<GroupInfoTable groups={groups} />, document.getElementById("group-info"));
+  ReactDOM.render(<GroupInfoTable ref={(c) => groupInfo = c} groups={groups} />, document.getElementById("group-info"));
   if (memberTable === null) {
     ReactDOM.render(<MemberTable ref={(c) => memberTable = c} group={groups[groupIndex]} />, document.getElementById("result"));
   } else {
+    groupInfo.setState({
+      groups: groups,
+    });
     memberTable.setState({
       group: groups[groupIndex],
       memberRooms: groups[groupIndex].memberRooms(),
