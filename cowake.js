@@ -134,7 +134,7 @@ function makeGroups(members, minMembers) {
       let numMaxRooms = members.length % n;
       let numMinRooms = n - numMaxRooms;
       let numSessions = n;
-      if (minMembers <= numMinMembers && n <= numMaxRooms && n >= numMaxMembers) {
+      if (minMembers <= numMinMembers && n >= numMaxMembers) {
         let group = new Group(members, n, numMaxMembers, numMaxRooms, numMinMembers, numMinRooms, numSessions, null);
         groups.push(group);
       }

@@ -92,6 +92,9 @@ function changeRadio() {
 }
 
 function showRooms(groups, groupIndex) {
+  if (groupIndex >= groups.length) {
+    return;
+  }
 
   ReactDOM.render(<GroupInfoTable ref={(c) => groupInfo = c} groups={groups} />, document.getElementById("group-info"));
   if (memberTable === null) {
