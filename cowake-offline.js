@@ -69,7 +69,7 @@ class MemberTable extends React.Component {
     const sessionHeaders = [];
     for (let i = 0; i < this.state.memberRooms[0].rooms.length; i++) {
       sessionHeaders.push(
-        <th class="no-sort" data-sort-method="none">{(i + 1) + "回目"}</th>
+        <th>{(i + 1) + "回目"}</th>
       )
     }
     let roomNo = 0;
