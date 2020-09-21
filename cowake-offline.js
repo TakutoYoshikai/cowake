@@ -79,6 +79,7 @@ class MemberTable extends React.Component {
           <th>Room No.</th>
           <th>ID1</th>
           <th>ID2</th>
+          <th>ID3</th>
           { sessionHeaders }
         </tr>
         { this.state.memberRooms.map((memberRoom, index) => {
@@ -89,6 +90,7 @@ class MemberTable extends React.Component {
               <td>{ rooms[0] > roomNo ? ++roomNo : "" }</td>
               <td>{ member.data[0] }</td>
               <td>{ member.data.length >= 2 ? member.data[1] : "" }</td>
+              <td>{ member.data.length >= 3 ? member.data[2] : "" }</td>
               {
                 rooms.map((room) => {
                   return <td>{room}</td>
