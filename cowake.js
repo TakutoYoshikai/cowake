@@ -124,6 +124,24 @@ function makePrimeNumbers() {
 let primeNumbers = makePrimeNumbers();
 let NUM_MAX_ROOMS = 16;
 
+function makeGroupsByMemberCount(count, minMembers) {
+  let groups = [];
+
+  for (let n of primeNumbers) {
+    if (n <= NUM_MAX_ROOMS) {
+      let numMinMembers = Math.floor(count / n);
+      let numMaxMembers = numMinMembers + 1;
+      let numMaxRooms = count % n;
+      let numMinRooms = n - numMaxRooms;
+      let numSessions = n;
+      if (minMembers <= numMinMembers && n >= numMaxMembers) {
+        let group = new Group(null, n, numMaxMembers, numMaxRooms, numMinMembers, numMinRooms, numSessions, null);
+        groups.push(group);
+      }
+    }
+  }
+  return groups;
+}
 function makeGroups(members, minMembers) {
   let groups = [];
 

@@ -4,31 +4,56 @@ class GroupInfoTable extends React.Component {
     super(props);
     this.state = {
       groups: props.groups,
+      selectable: props.selectable,
     }
   }
   render() {
-    return (
-      <table>
-        <tr>
-          <th>選択</th>
-          <th>総部屋数</th>
-          <th>部屋Aの人数</th>
-          <th>部屋Aの部屋数</th>
-          <th>部屋Bの人数</th>
-          <th>部屋Bの部屋数</th>
-        </tr>
-        { this.state.groups.map((group, index) => {
-          return (<tr>
-            <td><input type="radio" name="radio-session" value={ index.toString() } onChange={ changeRadio } /></td>
-            <td>{ group.numTotalRooms }</td>
-            <td>{ group.numMaxMembers }</td>
-            <td>{ group.numMaxRooms }</td>
-            <td>{ group.numMinMembers }</td>
-            <td>{ group.numMinRooms }</td>
-          </tr>);
-        })}
-      </table>
-    );
+    if (this.state.selectable) {
+      return (
+        <table>
+          <tr>
+            <th>選択</th>
+            <th>総部屋数</th>
+            <th>部屋Aの人数</th>
+            <th>部屋Aの部屋数</th>
+            <th>部屋Bの人数</th>
+            <th>部屋Bの部屋数</th>
+          </tr>
+          { this.state.groups.map((group, index) => {
+            return (<tr>
+              <td><input type="radio" name="radio-session" value={ index.toString() } onChange={ changeRadio } /></td>
+              <td>{ group.numTotalRooms }</td>
+              <td>{ group.numMaxMembers }</td>
+              <td>{ group.numMaxRooms }</td>
+              <td>{ group.numMinMembers }</td>
+              <td>{ group.numMinRooms }</td>
+            </tr>);
+          })}
+        </table>
+      );
+    } else {
+      return (
+        <table>
+          <tr>
+            <th>総部屋数</th>
+            <th>部屋Aの人数</th>
+            <th>部屋Aの部屋数</th>
+            <th>部屋Bの人数</th>
+            <th>部屋Bの部屋数</th>
+          </tr>
+          { this.state.groups.map((group, index) => {
+            return (<tr>
+              <td>{ group.numTotalRooms }</td>
+              <td>{ group.numMaxMembers }</td>
+              <td>{ group.numMaxRooms }</td>
+              <td>{ group.numMinMembers }</td>
+              <td>{ group.numMinRooms }</td>
+            </tr>);
+          })}
+        </table>
+      );
+
+    }
   }
 }
 
@@ -80,6 +105,7 @@ class MemberTable extends React.Component {
 let currentGroups = null;
 let memberTable = null;
 let groupInfo = null;
+let groupInfoForConfirm = null;
 
 function changeRadio() {
   var radio = document.getElementsByName("radio-session");
@@ -91,12 +117,25 @@ function changeRadio() {
   }
 }
 
+function confirmParams() {
+  let minMembers = parseInt(document.getElementById("minMembers").value);
+  let memberCount = parseInt(document.getElementById("member-count").value);
+  let groups = makeGroupsByMemberCount(memberCount, minMembers);
+  if (groupInfoForConfirm === null) {
+    ReactDOM.render(<GroupInfoTable ref={(c) => groupInfoForConfirm = c} groups={groups} selectable={false} />, document.getElementById("params-result"));
+  } else {
+    groupInfoForConfirm.setState({
+      groups: groups,
+    });
+  }
+}
+
 function showRooms(groups, groupIndex) {
   if (groupIndex >= groups.length) {
     return;
   }
 
-  ReactDOM.render(<GroupInfoTable ref={(c) => groupInfo = c} groups={groups} />, document.getElementById("group-info"));
+  ReactDOM.render(<GroupInfoTable ref={(c) => groupInfo = c} groups={groups} selectable={true} />, document.getElementById("group-info"));
   if (memberTable === null) {
     ReactDOM.render(<MemberTable ref={(c) => memberTable = c} group={groups[groupIndex]} />, document.getElementById("result"));
   } else {
@@ -122,9 +161,13 @@ document.getElementById("submit").onclick = function() {
 }
 
 let minMembers = document.getElementById("minMembers");
+let memberCount = document.getElementById("member-count");
 
 let mMinMembers = document.getElementById("m-min-members");
 let pMinMembers = document.getElementById("p-min-members");
+let mMemberCount = document.getElementById("m-member-count");
+let pMemberCount = document.getElementById("p-member-count");
+let confirmButton = document.getElementById("confirm");
 
 mMinMembers.onclick = function() {
   let value = parseInt(minMembers.value);
@@ -141,4 +184,25 @@ pMinMembers.onclick = function() {
     return;
   }
   minMembers.value = (value + 1).toString();
+}
+
+mMemberCount.onclick = function() {
+  let value = parseInt(memberCount.value);
+  if (value <= 1) {
+    memberCount.value = 1;
+    return;
+  }
+  memberCount.value = (value - 1).toString();
+}
+pMemberCount.onclick = function() {
+  let value = parseInt(memberCount.value);
+  if (value >= 240) {
+    memberCount.value = 240;
+    return;
+  }
+  memberCount.value = (value + 1).toString();
+
+}
+confirmButton.onclick = function() {
+  confirmParams();
 }
