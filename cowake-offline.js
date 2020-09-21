@@ -69,19 +69,22 @@ class MemberTable extends React.Component {
     const sessionHeaders = [];
     for (let i = 0; i < this.state.memberRooms[0].rooms.length; i++) {
       sessionHeaders.push(
-        <th>{(i + 1) + "回目"}</th>
+        <th class="no-sort" data-sort-method="none">{(i + 1) + "回目"}</th>
       )
     }
     let roomNo = 0;
     return (
-      <table>
-        <tr>
-          <th>Room No.</th>
-          <th>ID1</th>
-          <th>ID2</th>
-          <th>ID3</th>
-          { sessionHeaders }
-        </tr>
+      <table id="group">
+        <thead>
+          <tr>
+            <th class="no-sort" data-sort-method="none">Room No.</th>
+            <th>ID1</th>
+            <th>ID2</th>
+            <th>ID3</th>
+            { sessionHeaders }
+          </tr>
+        </thead>
+        <tbody>
         { this.state.memberRooms.map((memberRoom, index) => {
           let member = memberRoom.member;
           let rooms = memberRoom.rooms;
@@ -99,6 +102,7 @@ class MemberTable extends React.Component {
             </tr>
           );
         }) }
+        </tbody>
       </table>
     );
   }
@@ -149,6 +153,7 @@ function showRooms(groups, groupIndex) {
       memberRooms: groups[groupIndex].memberRooms(),
     });
   }
+  new Tablesort(document.getElementById("group"));
 }
 
 
