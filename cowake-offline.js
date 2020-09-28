@@ -144,6 +144,7 @@ function showRooms(groups, groupIndex) {
   ReactDOM.render(<GroupInfoTable ref={(c) => groupInfo = c} groups={groups} selectable={true} />, document.getElementById("group-info"));
   if (memberTable === null) {
     ReactDOM.render(<MemberTable ref={(c) => memberTable = c} group={groups[groupIndex]} />, document.getElementById("result"));
+    new Tablesort(document.getElementById("group"));
   } else {
     groupInfo.setState({
       groups: groups,
@@ -153,7 +154,6 @@ function showRooms(groups, groupIndex) {
       memberRooms: groups[groupIndex].memberRooms(),
     });
   }
-  new Tablesort(document.getElementById("group"));
 }
 
 
