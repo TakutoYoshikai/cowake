@@ -225,6 +225,8 @@ function enterExample() {
 11	棋士あんな	あんな
 12	棋士あかり	あかり
 13	川岸エレン	えれん`
+  minMembers.value = 2;
+  memberCount.value = 13
 }
 
 document.getElementById("enter-example").onclick = enterExample;
