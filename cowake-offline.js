@@ -137,7 +137,16 @@ function showRooms(groups, groupIndex) {
 
   if (memberTable === null) {
     ReactDOM.render(<MemberTable ref={(c) => memberTable = c} group={groups[groupIndex]} />, document.getElementById("result"));
-    new Tablesort(document.getElementById("group"));
+    let sort = new Tablesort(document.getElementById("group"));
+    let sortFlag = false;
+  document.getElementById("group").addEventListener("beforeSort", function() {
+    console.log("before sort");
+    if (!sortFlag) {
+      sortFlag = true;
+      sort.refresh();
+      sortFlag = false;
+    }
+  });
   } else {
     groupInfo.setState({
       groups: groups,
