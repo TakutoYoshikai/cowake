@@ -228,9 +228,18 @@ function enterExample() {
 10	佐々木千夏	ちなつ
 11	棋士あんな	あんな
 12	棋士あかり	あかり
-13	川岸エレン	えれん`
-  minMembers.value = 2;
-  memberCount.value = 13
+13	川岸エレン	えれん
+14	枯木奉太郎	ほうたろう
+15	五反田エル	える
+16	福田智	さとし
+17	茨城マヤカ	まやか
+18	神埼空太	そらた
+19	椎谷ましろ	ましろ
+20	青山菜々	なな
+21	赤坂龍	りゅう
+22	上井草みさ	みさ`
+  minMembers.value = 3;
+  memberCount.value = 22;
 }
 
 document.getElementById("enter-example").onclick = enterExample;
