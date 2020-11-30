@@ -156,3 +156,8 @@ select {
   border: 2px solid;
   border-radius: 5px;
 }
+
+.privacypolicy {
+  font-size: 12px !important;
+  text-align: center;
+}
