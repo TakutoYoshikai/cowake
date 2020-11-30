@@ -65,7 +65,7 @@ input[type="number"] {
   margin-bottom: 40px;
   border: 2px solid;
   border-radius: 5px;
-  width: 70px;
+  width: 100px;
   height: 40px;
 }
 
@@ -131,7 +131,7 @@ select {
 }
 
 .confirm {
-  width: 50px;
+  width: 90px;
   border: #BBB solid 2px;
   border-radius: 5px;
   display: inline-block;

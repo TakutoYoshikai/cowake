@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <title>Cowake</title>
     <script src="bower_components/papaparse/papaparse.min.js"></script>
     <script src="node_modules/tablesort/dist/tablesort.min.js"></script>
     <script src="node_modules/tablesort/dist/sorts/tablesort.number.min.js"></script>
@@ -18,17 +19,17 @@
           <td><span class="pm-button" id="m-min-members">-</span><input type="number" id="minMembers" value="3"><span class="pm-button" id="p-min-members">+</span></td>
         </tr>
         <tr>
-          <td>参加者数で見積もり</td>
+          <td>参加者数</td>
           <td><span class="pm-button" id="m-member-count">-</span><input type="number" id="member-count" value="50"><span class="pm-button" id="p-member-count">+</span></td>
-          <td><span class="confirm" id="confirm">確認</span></td>
+          <td><span class="confirm" id="confirm">部屋数計算</span></td>
         </tr>
       </table>
       <div id="params-result"></div>
-      参加者リストで組分け作成<br>
+      参加者リスト(最大3列、タブ区切り)<br>
       <textarea id="tsv"></textarea>
       <br>
       <div class="center">
-        <input type="button" id="submit" value="表示">
+        <input type="button" id="submit" value="部屋割り表示">
       </div>
     </div>
 
