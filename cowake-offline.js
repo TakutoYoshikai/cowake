@@ -14,19 +14,15 @@ class GroupInfoTable extends React.Component {
           <tr>
             <th>選択</th>
             <th>総部屋数</th>
-            <th>部屋Aの人数</th>
-            <th>部屋Aの部屋数</th>
-            <th>部屋Bの人数</th>
-            <th>部屋Bの部屋数</th>
+            <th>内訳</th>
+            <th></th>
           </tr>
           { this.state.groups.map((group, index) => {
             return (<tr>
               <td><input type="radio" name="radio-session" value={ index.toString() } onChange={ changeRadio } /></td>
               <td>{ group.numTotalRooms }</td>
-              <td>{ group.numMaxMembers }</td>
-              <td>{ group.numMaxRooms }</td>
-              <td>{ group.numMinMembers }</td>
-              <td>{ group.numMinRooms }</td>
+              <td>{ group.numMaxMembers + "人部屋x" + group.numMaxRooms }</td>
+              <td>{ group.numMinMembers + "人部屋x" + group.numMinRooms }</td>
             </tr>);
           })}
         </table>
@@ -36,18 +32,14 @@ class GroupInfoTable extends React.Component {
         <table>
           <tr>
             <th>総部屋数</th>
-            <th>部屋Aの人数</th>
-            <th>部屋Aの部屋数</th>
-            <th>部屋Bの人数</th>
-            <th>部屋Bの部屋数</th>
+            <th>内訳</th>
+            <th></th>
           </tr>
           { this.state.groups.map((group, index) => {
             return (<tr>
               <td>{ group.numTotalRooms }</td>
-              <td>{ group.numMaxMembers }</td>
-              <td>{ group.numMaxRooms }</td>
-              <td>{ group.numMinMembers }</td>
-              <td>{ group.numMinRooms }</td>
+              <td>{ group.numMaxMembers + "人部屋x" + group.numMaxRooms }</td>
+              <td>{ group.numMinMembers + "人部屋x" + group.numMinRooms }</td>
             </tr>);
           })}
         </table>
