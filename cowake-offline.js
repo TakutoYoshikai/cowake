@@ -159,6 +159,10 @@ document.getElementById("submit").onclick = function() {
   let minMembers = parseInt(document.getElementById("minMembers").value);
   let members = parseTsvFront(tsv);
   let groups = makeGroups(members, minMembers);
+  if (groups.length == 0) {
+    alert("そのグループ最小人数と参加者数では組分けを作れません");
+    return;
+  }
   currentGroups = groups;
   showRooms(groups, 0);
 
