@@ -90,7 +90,7 @@ class MemberTable extends React.Component {
           let rooms = memberRoom.rooms;
           return (
             <tr>
-              <td>{ rooms[0] > roomNo ? ++roomNo : "" }</td>
+              <td>{ rooms[0] }</td>
               <td>{ member.data[0] }</td>
               <td>{ member.data.length >= 2 ? member.data[1] : "" }</td>
               <td>{ member.data.length >= 3 ? member.data[2] : "" }</td>
