@@ -134,10 +134,6 @@ function showRooms(groups, groupIndex) {
   }
 
   ReactDOM.render(<GroupInfoTable ref={(c) => groupInfo = c} groups={groups} selectable={true} />, document.getElementById("group-info"));
-  var radios = document.getElementsByName("radio-session");
-  if (radios.length > 0) {
-    radios[0].checked = true;
-  }
 
   if (memberTable === null) {
     ReactDOM.render(<MemberTable ref={(c) => memberTable = c} group={groups[groupIndex]} />, document.getElementById("result"));
@@ -165,6 +161,10 @@ document.getElementById("submit").onclick = function() {
   }
   currentGroups = groups;
   showRooms(groups, 0);
+  var radios = document.getElementsByName("radio-session");
+  if (radios.length > 0) {
+    radios[0].checked = true;
+  }
 
 }
 
