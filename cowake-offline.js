@@ -210,3 +210,21 @@ pMemberCount.onclick = function() {
 confirmButton.onclick = function() {
   confirmParams();
 }
+
+function enterExample() {
+  document.getElementById("tsv").value = `1	吉開拓人	たくと
+2	吉開一花	いちか
+3	吉開二乃	にの
+4	吉開三玖	みく
+5	吉開四葉	よつば
+6	吉開五月	いつき
+7	佐々木京子	きょうこ
+8	佐々木あかり	あっかりーん
+9	佐々木結衣	ゆい
+10	佐々木千夏	ちなつ
+11	棋士あんな	あんな
+12	棋士あかり	あかり
+13	川岸エレン	えれん`
+}
+
+document.getElementById("enter-example").onclick = enterExample;

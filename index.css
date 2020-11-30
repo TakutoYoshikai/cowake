@@ -19,7 +19,7 @@ body {
 }
 
 textarea {
-  width: 300px;
+  width: 400px;
   height: 200px;
   border-radius: 10px;
   resize: none;
@@ -144,3 +144,15 @@ select {
   background-color: white;
 }
 
+.copyright {
+  font-size: 12px !important;
+  text-align: center;
+}
+
+#enter-example {
+  width: 120px;
+  height: 40px;
+  margin-left: 20px;
+  border: 2px solid;
+  border-radius: 5px;
+}
