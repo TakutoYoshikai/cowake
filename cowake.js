@@ -65,6 +65,17 @@ class Group {
     result = result.sort(function(a, b) {
       return a.rooms[0] - b.rooms[0];
     });
+    let j = 1;
+    let k = 0;
+    for (let i = 0; i < result.length; i++) {
+      if (result[i].rooms[0] > j) {
+        k = 1;
+        j++;
+      } else {
+        k++;
+      }
+      result[i].rooms.push(k);
+    }
     return result;
   }
 }
