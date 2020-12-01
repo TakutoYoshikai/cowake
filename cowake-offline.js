@@ -135,10 +135,19 @@ function showRooms(groups, groupIndex) {
 
   ReactDOM.render(<GroupInfoTable ref={(c) => groupInfo = c} groups={groups} selectable={true} />, document.getElementById("group-info"));
 
-  if (memberTable === null) {
-    ReactDOM.render(<MemberTable ref={(c) => memberTable = c} group={groups[groupIndex]} />, document.getElementById("result"));
-    let sort = new Tablesort(document.getElementById("group"));
-    let sortFlag = false;
+  if (memberTable !== null) {
+    groupInfo.setState({
+      groups: groups,
+    });
+    let elem = document.getElementById("result");
+    elem.parentNode.removeChild(elem);
+    elem = document.createElement("div");
+    elem.id = "result";
+    document.getElementById("result-wrapper").appendChild(elem);
+  } 
+  ReactDOM.render(<MemberTable ref={(c) => memberTable = c} group={groups[groupIndex]} />, document.getElementById("result"));
+  let sort = new Tablesort(document.getElementById("group"));
+  let sortFlag = false;
   document.getElementById("group").addEventListener("beforeSort", function() {
     console.log("before sort");
     if (!sortFlag) {
@@ -149,15 +158,7 @@ function showRooms(groups, groupIndex) {
       sortFlag = false;
     }
   });
-  } else {
-    groupInfo.setState({
-      groups: groups,
-    });
-    memberTable.setState({
-      group: groups[groupIndex],
-      memberRooms: groups[groupIndex].memberRooms(),
-    });
-  }
+
 }
 
 
