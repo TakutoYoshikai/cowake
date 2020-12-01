@@ -70,7 +70,7 @@ class MemberTable extends React.Component {
         <thead>
           <tr>
             <th class="no-sort" data-sort-method="none">Room No.</th>
-            <th>ID1</th>
+            <th id="id1">ID1</th>
             <th>ID2</th>
             <th>ID3</th>
             { sessionHeaders }
@@ -144,6 +144,8 @@ function showRooms(groups, groupIndex) {
     if (!sortFlag) {
       sortFlag = true;
       sort.refresh();
+      document.getElementById("id1").click();
+      document.getElementById("id1").click();
       sortFlag = false;
     }
   });

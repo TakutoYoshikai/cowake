@@ -1,6 +1,7 @@
 @font-face {
   font-family: "Corp";
   src: url("corp.ttf");
+  font-display: optional;
 }
 
 h1 {
