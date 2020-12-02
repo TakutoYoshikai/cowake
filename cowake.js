@@ -122,7 +122,7 @@ function isPrimeNumber(n) {
 function makePrimeNumbers() {
   let n = 1;
   let result = [];
-  while (n <= 100) {
+  while (n <= 200) {
     if (isPrimeNumber(n)) {
       result.push(n);
     }
@@ -133,7 +133,7 @@ function makePrimeNumbers() {
 
 
 let primeNumbers = makePrimeNumbers();
-let NUM_MAX_ROOMS = 16;
+let NUM_MAX_ROOMS = 1000;
 
 function makeGroupsByMemberCount(count, minMembers) {
   let groups = [];
