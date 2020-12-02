@@ -158,6 +158,7 @@ function showRooms(groups, groupIndex) {
       sortFlag = false;
     }
   });
+  document.getElementById("download").style.display = "block";
 
 }
 

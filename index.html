@@ -34,12 +34,39 @@
     </div>
 
     <div id="group-info"></div>
+    <br>
+    <p id="download" style="display:none"><a href="javascript:void(0)" onclick="onCSVDownload(this, document.getElementById('group'), 'table.csv');">CSVダウンロード</a></p>
+    <br>
     <div id="result-wrapper">
       <div id="result"></div>
     </div>
+    <script>
+    function onCSVDownload(a, table, filename) {
+      var escaped = /\t|\r?\n|\r|"/;
+      var e = /"/g;
+      var bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+      var csv = [], row = [], field, r, c;
+      for (r=0;  r<table.rows.length; r++) {
+        row.length = 0;
+        for (c=0; c<table.rows[r].cells.length; c++) {
+          field = table.rows[r].cells[c].textContent;
+          row.push(escaped.test(field)? '"'+field.replace(e, '""')+'"': field);
+        }
+        csv.push(row.join('\t'));
+      }
+      var blob = new Blob([bom, csv.join('\n')], {'type': 'text/csv'});
+      if (window.navigator.msSaveBlob) {
+        window.navigator.msSaveBlob(blob, filename);
+      } else {
+        a.download = filename;
+        a.href = window.URL.createObjectURL(blob);
+      }
+    }
+
+    </script>
     <p class="copyright">Copyright© 2020 Takuto Yoshikai. All Rights Reserved.</p>
     <p class="privacypolicy">No personal data will be recorded in the system.</p>
-    <p class="about"><a href="https://github.com/TakutoYoshikai/cowake-readme">about COWAKÉ</a></p>
+    <p class="about"><a href="https://github.com/TakutoYoshikai/cowake-readme" target="_blank">about COWAKÉ</a></p>
       <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
       <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
