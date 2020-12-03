@@ -172,3 +172,8 @@ select {
 #download {
   text-align: center;
 }
+
+.description {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
