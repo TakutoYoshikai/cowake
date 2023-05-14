@@ -1,0 +1,26 @@
+{
+  "name": "cowake",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "homepage": "https://cowake.yoshikai.net",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "npm run build && gh-pages -d . -m \"Updates --skip-ci\"",
+    "build": "npm install && bower install"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "csv": "^5.3.2",
+    "csv-parse": "^4.11.1",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "tablesort": "^5.2.1"
+  },
+  "devDependencies": {
+    "bower": "^1.8.14",
+    "gh-pages": "^5.0.0"
+  }
+}
