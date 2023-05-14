@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "papaparse": "^5.2.0"
+    "papaparse": "^5.2.0",
+    "tablesort": "https://github.com/tristen/tablesort.git#5.2.1"
   }
 }
