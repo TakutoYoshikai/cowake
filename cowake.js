@@ -81,7 +81,7 @@ class Group {
 }
 
 function parseTsv(text) {
-  const parse = require("csv-parse/lib/sync");
+  const { parse } = require("csv-parse/sync");
   let members = [];
   let records = parse(text, {
     delimiter: "\t"
